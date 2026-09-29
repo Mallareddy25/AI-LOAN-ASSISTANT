@@ -1,0 +1,37 @@
+{
+  "name": "loan-information-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Loan Information Assistant — 4SU24CS045. Educational AI chatbot explaining loan terminology, eligibility, documents, EMI and repayment.",
+  "author": "4SU24CS045",
+  "license": "MIT",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "dev": "concurrently -n \"server,client\" -c \"cyan,magenta\" \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm --workspace server run dev",
+    "dev:client": "npm --workspace client run dev",
+    "build": "npm --workspace client run build",
+    "start": "npm --workspace server run start",
+    "lint": "npm --workspace client run lint && npm --workspace server run lint",
+    "test": "npm --workspace server run test",
+    "test:watch": "npm --workspace server run test:watch",
+    "verify": "npm run lint && npm test && npm run build && npm run verify:browser && npm run verify:ui && npm run verify:gl",
+    "verify:browser": "npm --workspace client run verify:browser",
+    "verify:ui": "npm --workspace client run verify:ui",
+    "verify:gl": "npm --workspace client run verify:gl",
+    "db:setup": "npm --workspace server run db:setup",
+    "db:migrate": "npm --workspace server run db:migrate",
+    "db:seed": "npm --workspace server run db:seed",
+    "db:reset": "npm --workspace server run db:reset",
+    "db:create": "npm --workspace server run db:create"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

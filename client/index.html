@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#F4F6FA" />
+    <meta
+      name="description"
+      content="AI Loan Information Assistant — an educational assistant that explains loan terminology, eligibility factors, required documents, repayment and EMI concepts."
+    />
+    <title>AI Loan Information Assistant</title>
+    <!--
+      Resolve the stored theme before first paint. Without this the page would
+      render light and then flip, because the provider only runs after the
+      bundle has parsed. Kept as an external file so it satisfies the
+      production CSP (script-src 'self'), and loaded as a classic script so it
+      stays render-blocking.
+    -->
+    <script src="/theme-init.js"></script>
+    <!-- Inline SVG mark: a gold ₹ coin. Avoids a network request for /favicon.ico. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23070910'/%3E%3Ccircle cx='16' cy='16' r='12.5' fill='none' stroke='%23C9A227' stroke-width='2'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='700' text-anchor='middle' fill='%23E8CE7A'%3E%E2%82%B9%3C/text%3E%3C/svg%3E"
+    />
+    <style>
+      /* Painted before React mounts so there is never a flash. theme-init.js
+         has already set data-theme, so this matches the stored preference. */
+      html {
+        background: #f4f6fa;
+        color-scheme: light;
+      }
+      html[data-theme='dark'] {
+        background: #070910;
+        color-scheme: dark;
+      }
+      #root {
+        min-height: 100vh;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: inherit;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        transition: opacity 0.4s ease;
+      }
+      #boot .ring {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 2px solid rgba(127, 127, 127, 0.24);
+        border-top-color: #c9a227;
+        animation: boot-spin 0.9s linear infinite;
+      }
+      @keyframes boot-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot .ring {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="boot"><div class="ring"></div></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

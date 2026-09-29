@@ -1,0 +1,42 @@
+{
+  "name": "loan-information-assistant-client",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "React + Vite frontend for the AI Loan Information Assistant (4SU24CS045)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "verify:browser": "node scripts/route-smoke.mjs && node scripts/flow-test.mjs && node scripts/responsive-test.mjs",
+    "verify:ui": "node scripts/orb-check.mjs",
+    "verify:gl": "node scripts/gl-lifecycle.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "axios": "^1.7.9",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.3",
+    "react-router-dom": "^6.28.1",
+    "recharts": "^2.15.0",
+    "remark-gfm": "^4.0.0",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "playwright-core": "^1.63.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.11"
+  }
+}
