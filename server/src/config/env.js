@@ -58,6 +58,24 @@ function requireSecret(name, devFallback) {
 
 const openaiApiKey = (process.env.OPENAI_API_KEY || '').trim();
 
+/**
+ * TLS settings for the MySQL connection.
+ *
+ * `DATABASE_SSL=true` is all a managed provider needs. When the provider
+ * publishes a CA certificate, `DATABASE_SSL_CA` (a PEM string or a path to one)
+ * turns on real verification instead of the encrypted-but-unverified default.
+ */
+function sslOptions() {
+  const enabled = /^(1|true|yes|on|required)$/i.test((process.env.DATABASE_SSL || '').trim());
+  if (!enabled) return undefined;
+
+  const ca = (process.env.DATABASE_SSL_CA || '').trim();
+  return {
+    rejectUnauthorized: Boolean(ca),
+    ...(ca ? { ca } : {}),
+  };
+}
+
 const config = {
   env: NODE_ENV,
   isProduction,
@@ -84,6 +102,10 @@ const config = {
     connectionLimit: int(process.env.DATABASE_CONNECTION_LIMIT, 10),
     queueLimit: 0,
     connectTimeout: 10_000,
+    // Managed MySQL providers (Aiven, PlanetScale, Railway's plugin in a public
+    // network) reject plaintext connections. Left off by default so a local
+    // MySQL on 127.0.0.1 keeps working with no configuration at all.
+    ssl: sslOptions(),
     // Test suite uses a separate schema so dev data is never touched.
     get name() {
       return isTest

@@ -35,6 +35,7 @@ function getPool() {
       bigNumberStrings: false,
       multipleStatements: false,
       namedPlaceholders: false,
+      ...(config.database.ssl ? { ssl: config.database.ssl } : {}),
     });
 
     logger.info('MySQL connection pool created', {

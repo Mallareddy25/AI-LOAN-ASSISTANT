@@ -1,0 +1,49 @@
+# Render blueprint for the AI Loan Information Assistant.
+#
+# The app deploys as ONE web service: Express serves both `client/dist` and
+# `/api` from a single origin, so there is no second service and no CORS setup.
+# The database is external (Aiven free MySQL 8) — see DEPLOY.md.
+#
+# Create a blueprint from this repo in the Render dashboard:
+#   New  →  Blueprint  →  pick Mallareddy25/AI-LOAN-ASSISTANT
+services:
+  - type: web
+    name: ai-loan-assistant
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    # The app listens on the port Render injects as $PORT, so nothing to set.
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_HOST
+        sync: false
+      - key: DATABASE_PORT
+        value: "3306"
+      - key: DATABASE_USER
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: DATABASE_NAME
+        sync: false
+      # Aiven terminates TLS, so the pool must be told to negotiate it.
+      - key: DATABASE_SSL
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      # Your Render URL, e.g. https://ai-loan-assistant.onrender.com
+      - key: CLIENT_URL
+        sync: false
+      # Empty on purpose: the assistant answers from the local knowledge base.
+      - key: OPENAI_API_KEY
+        value: ""
+      - key: SEED_ADMIN_NAME
+        sync: false
+      - key: SEED_ADMIN_EMAIL
+        sync: false
+      - key: SEED_ADMIN_PASSWORD
+        sync: false

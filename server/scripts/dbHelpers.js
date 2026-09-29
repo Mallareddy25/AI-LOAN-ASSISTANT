@@ -18,6 +18,7 @@ async function getAdminConnection({ withDatabase = true } = {}) {
     user: config.database.user,
     password: config.database.password,
     multipleStatements: true,
+    ...(config.database.ssl ? { ssl: config.database.ssl } : {}),
     ...(withDatabase ? { database: config.database.database } : {}),
   });
 }

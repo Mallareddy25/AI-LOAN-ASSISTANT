@@ -1,0 +1,22 @@
+# Files the Railway build must never receive.
+#
+# Secrets and local state are excluded on purpose: production configuration comes
+# from the service's environment variables, not from a committed file.
+
+.env
+.env.*
+!.env.example
+
+node_modules/
+client/node_modules/
+server/node_modules/
+
+dist/
+client/dist/
+server/dist/
+*.tsbuildinfo
+
+*.log
+.DS_Store
+.vscode/
+.idea/
