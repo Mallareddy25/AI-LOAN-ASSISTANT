@@ -1,0 +1,22 @@
+# Never upload these to Vercel.
+#
+# The client is rebuilt on Vercel (`npm run build`), so a local `client/dist`
+# is dead weight. Secrets come from the project's environment variables, never
+# from a committed file.
+
+.env
+.env.*
+!.env.example
+
+node_modules/
+client/node_modules/
+server/node_modules/
+
+dist/
+client/dist/
+server/dist/
+
+*.log
+.DS_Store
+.vscode/
+.idea/

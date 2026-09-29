@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
-    "lint": "eslint src --ext .js",
+    "lint": "eslint src ../api --ext .js",
     "test": "vitest run",
     "test:watch": "vitest",
     "db:create": "node scripts/createDatabase.js",
